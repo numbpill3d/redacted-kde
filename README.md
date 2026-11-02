@@ -27,10 +27,13 @@ static, pixelation, censor bars, obfuscation and dissociation.
 
 ## Rebuild
 
-    python3 tools/build_colors.py tools/build_kvantum.py ...   # each generator reads palette.py
-    python3 tools/build_wallpaper.py && bash tools/build_scene.sh
-    python3 tools/build_plymouth.py
-    python3 tools/check_tint.py      # fails on any non-grey colour
+    bash tools/build_all.sh && bash apply.sh    # every generator, scene staging, grey check
+
+Accent strength is one knob, `ACCENT_STEP` in `palette.py` (levels above the surface):
+
+    sed -i 's/^ACCENT_STEP = .*/ACCENT_STEP = 10/' palette.py && bash tools/build_all.sh && bash apply.sh
+
+The SDDM and KSplash QML hard-code their greys, so the knob doesn't reach them.
 
 Previews with real GPU shaders: `tools/nested-grab.sh` (headless nested KWin).
 The KWin effect renders offline with `build/venv/bin/python tools/render-censor.py`.
