@@ -22,7 +22,7 @@ P = 20          # shadow padding on every side
 B = 3           # side and bottom border
 ET, TH, EB = 3, 30, 3   # title edge top, title height, title edge bottom
 T = ET + TH + EB        # title bar height
-C = 42          # stretchable centre in the template
+C = 48          # border tile period: every pattern below repeats every 48 px
 BTN = 24
 
 W = P + B + C + B + P
@@ -82,15 +82,70 @@ def rect(x, y, w, h, fill, extra=""):
     return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{fill}" {extra}/>'
 
 
+def bayer(n=4):
+    m = [[0]]
+    while len(m) < n:
+        k = len(m)
+        m = [[4 * v + o for v in row] + [4 * v + o2 for v in row] for row, (o, o2) in
+             [(r, (0, 2)) for r in m] + [(r, (3, 1)) for r in m]]
+    return m
+
+
+BAYER = bayer(4)
+
+
+def mosaic_seam(x, w, ybot, active):
+    """The seam under the title as censor pixels: 2 px blocks, ordered-dithered,
+    dense at the seam and thinning upward. A pure function of (x mod C), so the
+    tiled border repeats seamlessly."""
+    o = []
+    if w < 8:
+        return o
+    rows = (0.78, 0.52, 0.30, 0.14, 0.06)
+    lv = (38, 32, 27, 23, 20) if active else (16, 14, 12, 11, 10)
+    for r, dens in enumerate(rows):
+        y = ybot - 2 * (r + 1)
+        for bx in range(0, w, 2):
+            gx = (x + bx) % C
+            th = (BAYER[(gx // 2) % 4][r % 4] + 0.5) / 16
+            jitter = ((gx * 7 + r * 13) % 11) / 11 * 0.18 - 0.09
+            if th + jitter < dens:
+                v = lv[r] + ((gx * 5 + r * 3) % 3) * 2
+                o.append(rect(x + bx, y, 2, 2, PAL.grey(v)))
+    return o
+
+
+def ruler(x, w, y, active):
+    """Measurement ticks hanging off the top hairline: long every 48, short every 12."""
+    if w < 12:
+        return []
+    o = []
+    for t in range(0, w, 12):
+        gx = (x + t) % C
+        n = 4 if gx == 0 else 2 if gx == 24 else 1
+        o.append(rect(x + t, y + 1, 1, n, PAL.grey((44 if n > 1 else 32) if active else 17)))
+    return o
+
+
 def title_strip(x, w, active, left_edge=False, right_edge=False, Y0=Y0):
     """A slice of the title bar from window top to the centre."""
     YT = Y0 + T
-    bar, seam, hair = ("barA", "seam", BRASS_HI) if active else ("barI", "seamI", ASH)
+    bar, hair = ("barA", BRASS_HI) if active else ("barI", ASH)
     o = [rect(x, Y0, w, T, f"url(#{bar})")]
     o.append(f'<image x="{x}" y="{Y0}" width="{w}" height="{T}" preserveAspectRatio="none" xlink:href="{NOISE}" opacity="{1 if active else 0.5}"/>')
-    o += [rect(x, Y0, w, 1, hair),
-          rect(x, YT - 12, w, 12, f"url(#{seam})"),
-          rect(x, YT - 1, w, 1, FLAME if active else ASH, '' if active else 'opacity="0.8"')]
+    # scanlines: a faint darker row every 3 px
+    for yy in range(Y0 + 2, YT - 2, 3):
+        o.append(rect(x, yy, w, 1, "#000", f'opacity="{0.22 if active else 0.12}"'))
+    if not active:
+        # unfocused windows are redacted: a censor band through the title (the text sits on top)
+        mid = Y0 + ET + TH // 2
+        o += [rect(x, mid - 7, w, 14, "#000", 'opacity="0.62"'),
+              rect(x, mid - 8, w, 1, PAL.grey(15)),
+              rect(x, mid + 7, w, 1, "#000", 'opacity="0.8"')]
+    o.append(rect(x, Y0, w, 1, hair))
+    o += ruler(x, w, Y0, active)
+    o += mosaic_seam(x, w, YT - 1, active)
+    o.append(rect(x, YT - 1, w, 1, FLAME if active else ASH, '' if active else 'opacity="0.8"'))
     if left_edge:
         o.append(rect(x, Y0, 1, T, hair))
     if right_edge:
@@ -101,20 +156,38 @@ def title_strip(x, w, active, left_edge=False, right_edge=False, Y0=Y0):
 def side_strip(x, y, h, active, outer_left):
     hair = BRASS if active else ASH
     o = [rect(x, y, B, h, BASALT if active else PAL.grey(9))]
-    o.append(rect(x if outer_left else x + B - 1, y, 1, h, hair))
+    ox = x if outer_left else x + B - 1
+    o.append(rect(ox, y, 1, h, hair))
     o.append(rect(x + B - 1 if outer_left else x, y, 1, h, PAL.VOID))
+    if h >= C:
+        o.append(rect(ox, y + 22, 1, 4, PAL.grey(40 if active else 18)))
     return o
 
 
 def bottom_strip(x, w, active):
     hair = BRASS if active else ASH
-    return [rect(x, YB, w, B, BASALT if active else PAL.grey(9)),
-            rect(x, YB, w, 1, PAL.VOID),
-            rect(x, Y1 - 1, w, 1, hair)]
+    o = [rect(x, YB, w, B, BASALT if active else PAL.grey(9)),
+         rect(x, YB, w, 1, PAL.VOID),
+         rect(x, Y1 - 1, w, 1, hair)]
+    if w >= C:
+        o.append(rect(x + 22, Y1 - 1, 4, 1, PAL.grey(40 if active else 18)))
+    return o
 
 
 def stud(cx, cy, active):
-    return []
+    """Print crop marks in the shadow padding: the window's two edges carried on
+    outward past the corner, after a gap, as if it had been cut from a file."""
+    sx = -1 if cx < W / 2 else 1
+    sy = -1 if cy < H / 2 else 1
+    ex = X0 if sx < 0 else X1 - 1          # edge column
+    ey = Y0 if sy < 0 else Y1 - 1          # edge row
+    g, L, gap = PAL.grey(44 if active else 20), 12, 4
+    hx = ex - gap - L if sx < 0 else ex + 1 + gap      # horizontal mark, on the edge row
+    vy = ey - gap - L if sy < 0 else ey + 1 + gap      # vertical mark, on the edge column
+    o = [rect(hx, ey, L, 1, g), rect(ex, vy, 1, L, g)]
+    if active:   # registration pip where the marks would meet
+        o.append(rect(ex + sx * (gap + 2), ey + sy * (gap + 2), 1, 1, PAL.grey(34)))
+    return o
 
 
 def frame(prefix, active):
@@ -162,7 +235,6 @@ def decoration_svg():
     return "\n".join([
         f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
         defs(), frame("decoration", True), frame("decoration-inactive", False), masks(),
-        f'<rect id="hint-stretch-borders" x="0" y="0" width="1" height="1" fill="none"/>',
         # Aurorae stretches the maximized centre over the whole window height; tiling it
         # at its natural size instead keeps the title bar art 1:1 in the visible strip
         '<rect id="decoration-maximized-hint-tile-center" x="0" y="0" width="1" height="1" fill="none"/>',
@@ -189,21 +261,44 @@ GLYPHS = {
     # a censor block
     "menu":        f"M{M-4.5},{M-2} L{M+4.5},{M-2} L{M+4.5},{M+2} L{M-4.5},{M+2} Z",
 }
-PLATE = f"M5,3.5 L{BTN-5},3.5 Q{BTN-3.5},3.5 {BTN-3.5},5 L{BTN-3.5},{BTN-5} Q{BTN-3.5},{BTN-3.5} {BTN-5},{BTN-3.5} L5,{BTN-3.5} Q3.5,{BTN-3.5} 3.5,{BTN-5} L3.5,5 Q3.5,3.5 5,3.5 Z"
+# plate with pixel-stepped corners (two 1 px steps), no curves
+_a, _b = 3.5, BTN - 3.5
+PLATE = (f"M{_a+2},{_a} L{_b-2},{_a} L{_b-2},{_a+1} L{_b-1},{_a+1} L{_b-1},{_a+2} L{_b},{_a+2} "
+         f"L{_b},{_b-2} L{_b-1},{_b-2} L{_b-1},{_b-1} L{_b-2},{_b-1} L{_b-2},{_b} L{_a+2},{_b} "
+         f"L{_a+2},{_b-1} L{_a+1},{_b-1} L{_a+1},{_b-2} L{_a},{_b-2} L{_a},{_a+2} L{_a+1},{_a+2} "
+         f"L{_a+1},{_a+1} L{_a+2},{_a+1} Z")
 
 
-def button_state(ident, glyph, rim, fill, ink, glow=None, halo=0.0, filled=False, plate=True):
+def mosaic_rim(density, lit):
+    """2 px censor pixels scattered just inside the plate rim."""
+    o = []
+    for i, (x, y) in enumerate([(x, y) for y in range(5, BTN - 5, 2) for x in range(5, BTN - 5, 2)]):
+        edge = min(x - 5, BTN - 7 - x, y - 5, BTN - 7 - y)
+        if edge > 2:
+            continue
+        th = (BAYER[(x // 2) % 4][(y // 2) % 4] + 0.5) / 16
+        if th < density * (1.0 - edge * 0.3):
+            o.append(rect(x, y, 2, 2, PAL.grey(lit - 4 * ((x * 3 + y) % 3))))
+    return o
+
+
+def button_state(ident, glyph, rim, fill, ink, glow=None, halo=0.0, filled=False, plate=True,
+                 mosaic=0.0, lit=30, censor=False):
     o = [f'<g id="{ident}">', rect(0, 0, BTN, BTN, "#000", 'opacity="0"')]
     if halo:
         o.append(f'<circle cx="{M}" cy="{M}" r="{M}" fill="url(#halo)" opacity="{halo}"/>')
     if plate:
         o.append(f'<path d="{PLATE}" fill="{fill}" stroke="{rim}" stroke-width="1"/>')
+    if mosaic:
+        o += mosaic_rim(mosaic, lit)
     common = 'stroke-linecap="square" stroke-linejoin="miter"'
     paint = f'fill="{ink}"' if filled else 'fill="none"'
     if glow:
         o.append(f'<path d="{glyph}" fill="none" {common} stroke="{glow}" stroke-width="4" opacity="0.20"/>')
         o.append(f'<path d="{glyph}" fill="none" {common} stroke="{glow}" stroke-width="2.6" opacity="0.35"/>')
     o.append(f'<path d="{glyph}" {paint} {common} stroke="{ink}" stroke-width="1.4"/>')
+    if censor:   # the close glyph gets struck out by a censor bar
+        o += [rect(M - 7, M - 2, 14, 4, "#000"), rect(M - 7, M - 2, 14, 1, PAL.grey(lit + 14))]
     o.append("</g>")
     return "\n".join(o)
 
@@ -220,11 +315,14 @@ def button_svg(name):
          "</defs>")
     states = [
         button_state("active-center", g, BRASS, "url(#well)", PAL.TEXT_DIM if not filled else FLAME, plate=False, filled=filled, glow=FLAME if filled else None),
-        button_state("hover-center", g, accent, "url(#wellHot)", PAL.TEXT_HI, glow=accent, halo=0.55, filled=filled),
-        button_state("pressed-center", g, accent, "url(#wellHot)", PEACH, glow=accent, halo=0.85, filled=filled),
+        button_state("hover-center", g, accent, "url(#wellHot)", PAL.TEXT_HI, glow=accent, halo=0.45, filled=filled,
+                     mosaic=0.55, lit=44 if hot else 34, censor=hot),
+        button_state("pressed-center", g, accent, PAL.VOID, PEACH, glow=accent, halo=0.85, filled=filled,
+                     mosaic=0.9, lit=52 if hot else 40, censor=hot),
         button_state("inactive-center", g, ASH, PAL.grey(11), PAL.TEXT_MUTE, plate=False, filled=filled),
-        button_state("hover-inactive-center", g, BRASS_HI, "url(#well)", PAL.TEXT, glow=accent, halo=0.3, filled=filled),
-        button_state("pressed-inactive-center", g, accent, "url(#wellHot)", PEACH, halo=0.6, filled=filled),
+        button_state("hover-inactive-center", g, BRASS_HI, "url(#well)", PAL.TEXT, glow=accent, halo=0.3, filled=filled,
+                     mosaic=0.35, lit=28),
+        button_state("pressed-inactive-center", g, accent, PAL.VOID, PEACH, halo=0.6, filled=filled, mosaic=0.7, lit=34),
         button_state("deactivated-center", g, ASH_LO, PAL.grey(11), ASH, plate=False, filled=filled),
         button_state("deactivated-inactive-center", g, ASH_LO, PAL.grey(11), ASH_LO, plate=False, filled=filled),
     ]
@@ -273,7 +371,7 @@ BorderRadius=0
 
 META = f"""[Desktop Entry]
 Name={NAME}
-Comment=Monochrome black frame: faint grain, a seam a breath lighter than black, censor-block menu button.
+Comment=Monochrome black frame: scanlined title bar over a dithered censor-pixel seam, measurement ticks, crop marks at the corners, unfocused windows censored, close struck out by a censor bar.
 Type=Service
 X-KDE-ServiceTypes=AuroraeTheme
 X-KDE-Library=aurorae

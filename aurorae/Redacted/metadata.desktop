@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Redacted
-Comment=Monochrome black frame: faint grain, a seam a breath lighter than black, censor-block menu button.
+Comment=Monochrome black frame: scanlined title bar over a dithered censor-pixel seam, measurement ticks, crop marks at the corners, unfocused windows censored, close struck out by a censor bar.
 Type=Service
 X-KDE-ServiceTypes=AuroraeTheme
 X-KDE-Library=aurorae

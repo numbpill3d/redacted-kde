@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 *.qsb.tmp
 build/
+repos/
+screenshots/raw/

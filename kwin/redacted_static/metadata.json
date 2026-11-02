@@ -1,13 +1,17 @@
 {
     "KPackageStructure": "KWin/Script",
     "KPlugin": {
-        "Authors": [ { "Name": "splicer scorn (voidrane)" } ],
-        "Description": "The active window comes loose: a faint double of its frame drifts off, and censor bars, mosaic chunks and static specks flicker along its edge",
+        "Authors": [
+            {
+                "Name": "splicer scorn (voidrane)"
+            }
+        ],
+        "Description": "The active window is under review: corner brackets lock onto it on focus, a write head crawls its edge stamping censor bars that decay into mosaic, and a case-file tag censors its title",
         "Icon": "preferences-system-windows",
         "Id": "redacted_static",
         "License": "GPL-3.0-or-later",
         "Name": "Redacted Static",
-        "Version": "1.0",
+        "Version": "2.0",
         "EnabledByDefault": false
     },
     "X-Plasma-API": "declarativescript",

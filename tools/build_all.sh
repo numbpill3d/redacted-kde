@@ -5,7 +5,7 @@
 set -euo pipefail
 R=$(cd "$(dirname "$0")/.." && pwd)
 cd "$R"
-for g in colors kvantum plasma aurorae icons wallpaper overlay plymouth; do
+for g in colors kvantum plasma aurorae icons wallpaper plymouth; do
     python3 "tools/build_$g.py"
 done
 bash tools/build_scene.sh
