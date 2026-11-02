@@ -18,6 +18,7 @@ REPOS = ROOT / "repos"
 GPL = Path("/usr/share/licenses/spdx/GPL-3.0-or-later.txt")
 GH = "https://github.com/numbpill3d"
 VERSION = "1.0"
+HUB = "redacted-kde"   # numbpill3d/redacted is an older, unrelated (archived) repo
 
 BLURB = ("Redacted is a monochrome-black look for KDE Plasma 6 about obfuscation and censorship. Every colour is a neutral grey, "
          "and the accents sit only a few levels above black: almost imperceptible, but just perceptible. The motifs are static, "
@@ -328,7 +329,7 @@ def shot(src, dst):
 def suite_table(skip):
     rows = [f"| {p['short']} | [{r}]({GH}/{r}) |" for r, p in PIECES.items() if r != skip]
     return "## The rest of the suite\n\n| piece | repo |\n|---|---|\n" + "\n".join(rows) + \
-           f"\n\nEverything at once, with the generators: [redacted]({GH}/redacted).\n"
+           f"\n\nEverything at once, with the generators: [{HUB}]({GH}/{HUB}).\n"
 
 
 def readme(repo, p):
@@ -399,7 +400,7 @@ Requirements: {p['requires']}
 
 Install: {p['install_store']}
 
-Part of the Redacted suite: global theme + splash, Plasma style, Aurorae, colours, Kvantum, icons, Konsole/kitty, SDDM, Plymouth, animated and still wallpaper, the Censor open/close effect, the Static KWin script and the Redacted Clock. Source for every piece: {GH}/redacted
+Part of the Redacted suite: global theme + splash, Plasma style, Aurorae, colours, Kvantum, icons, Konsole/kitty, SDDM, Plymouth, animated and still wallpaper, the Censor open/close effect, the Static KWin script and the Redacted Clock. Source for every piece: {GH}/{HUB}
 """
 
 
@@ -455,7 +456,7 @@ def main():
         "  - STORE-LISTING.txt (name, category, tags and description, ready to paste)\n\n"
         "Categories marked 'check this name' are the closest store category I know of; confirm them in the store's list.\n\n"
         + "\n".join(f"  {r:26s} {p['category'].replace(CONFIRM, ' *'):30s} {r}.tar.gz" for r, p in PIECES.items())
-        + f"\n\nSource repos: {GH}/<folder name>   (hub with everything: {GH}/redacted)\n")
+        + f"\n\nSource repos: {GH}/<folder name>   (hub with everything: {GH}/{HUB})\n")
     shutil.copy(SHOTS / "desktop.png", DOCS / "redacted-desktop.png")
 
 

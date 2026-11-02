@@ -40,5 +40,5 @@ for d in "$B"/repos/redacted-*; do
     publish "$d" "$r" "$desc" "$K/$r/$r.tar.gz" "${tags[@]}"
 done
 
-publish "$B" redacted "Redacted: a monochrome-black KDE Plasma 6 suite of obfuscation and censorship. Global theme, Aurorae, Plasma style, Kvantum, icons, SDDM, Plymouth, animated wallpaper, KWin effect + script, clock, all generated from one palette." "" \
+publish "$B" redacted-kde "Redacted: a monochrome-black KDE Plasma 6 suite of obfuscation and censorship. Global theme, Aurorae, Plasma style, Kvantum, icons, SDDM, Plymouth, animated wallpaper, KWin effect + script, clock, all generated from one palette." "" \
     redacted kde plasma6 plasma-6 dark black monochrome grayscale censored glitch static pixel sddm plymouth aurorae kvantum kwin-effect kde-theme theme-suite minimal
