@@ -17,3 +17,6 @@ theme=__aurorae__svg__Redacted
 [ksplashrc][KSplash]
 Theme=scorn.redacted
 Engine=KSplashQML
+
+[Wallpaper]
+Image=Redacted

@@ -1,9 +1,8 @@
 /*
- * redacted — SDDM theme (Qt6 greeter, pure QtQuick, no shaders)
- * A tape dubbed in blood, on playback: the wallpaper face under scanlines, grain,
- * a rolling tracking band and the odd tape tear; a VCR on-screen display; a
- * blood-black glass panel with a crimson glow seam. All motion is image swaps and
- * transforms, cheap on the UHD 620.
+ * Redacted — SDDM theme (Qt6 greeter)
+ * The shared Redacted scene (the face under static, mosaic and a slipping
+ * censor bar; one GPU shader at 12 fps) behind a monochrome-black panel and
+ * an on-screen display. A failed login knocks the censor bar off the eyes.
  */
 
 import QtQuick
@@ -15,25 +14,25 @@ Item {
     height: Screen.height
 
     // shared with ~/redacted/palette.py
-    readonly property color cVoid:    "#0a0304"
-    readonly property color cAbyss:   "#0e0506"
-    readonly property color cBase:    "#150809"
-    readonly property color cSurface: "#1d0a0d"
-    readonly property color cRaised:  "#290e12"
-    readonly property color cEdge:    "#45141b"
-    readonly property color cEdgeHi:  "#641c25"
-    readonly property color cOxblood:  "#98182b"
-    readonly property color cFlesh:    "#e88a90"
-    readonly property color cCrimDeep: "#3a0911"
-    readonly property color cCrimLo:   "#8c1024"
-    readonly property color cCrim:     "#dc1f3c"
-    readonly property color cCrimHi:   "#ff5368"
-    readonly property color cCrimGlow: "#ffa3ad"
-    readonly property color cText:    "#e8d2d0"
-    readonly property color cTextHi:  "#fff1ef"
-    readonly property color cDim:     "#a87e80"
-    readonly property color cMute:    "#6b4549"
-    readonly property color cRec:     "#ff6a2b"
+    readonly property color cVoid:    "#020202"
+    readonly property color cAbyss:   "#080808"
+    readonly property color cBase:    "#0a0a0a"
+    readonly property color cSurface: "#0c0c0c"
+    readonly property color cRaised:  "#121212"
+    readonly property color cEdge:    "#161616"
+    readonly property color cEdgeHi:  "#1e1e1e"
+    readonly property color cOxblood:  "#333333"
+    readonly property color cFlesh:    "#606060"
+    readonly property color cCrimDeep: "#111111"
+    readonly property color cCrimLo:   "#1a1a1a"
+    readonly property color cCrim:     "#2a2a2a"
+    readonly property color cCrimHi:   "#4a4a4a"
+    readonly property color cCrimGlow: "#8a8a8a"
+    readonly property color cText:    "#9a9a9a"
+    readonly property color cTextHi:  "#d6d6d6"
+    readonly property color cDim:     "#5c5c5c"
+    readonly property color cMute:    "#383838"
+    readonly property color cRec:     "#d8d8d8"
 
     readonly property real   u:     height / 1080
     readonly property string mono:  osdFont.status === FontLoader.Ready ? osdFont.font.family : "monospace"
@@ -55,7 +54,6 @@ Item {
     FontLoader { id: osdBold;  source: "fonts/TerminessNerdFontMono-Bold.ttf" }
 
     Timer { interval: 1000; running: true; repeat: true; onTriggered: { root.now = new Date(); root.counter++ } }
-    Timer { interval: 70;   running: true; repeat: true; onTriggered: root.noiseFrame = (root.noiseFrame + 1 + Math.floor(Math.random() * 4)) % 6 }
 
     // sessionModel exposes names only through delegates
     Repeater {
@@ -99,7 +97,7 @@ Item {
         target: sddm
         function onLoginFailed() {
             root.loginPending = false
-            root.errorMsg = "TRACKING ERROR  //  ACCESS DENIED"
+            root.errorMsg = "IDENTITY REJECTED  //  [REDACTED]"
             passField.text = ""; passField.forceActiveFocus()
             shake.restart(); glitch.restart()
         }
@@ -120,74 +118,25 @@ Item {
         id: screen
         anchors.fill: parent
         transformOrigin: Item.Center
-
-        Item {
-            id: picture
+        RedactedScene {
+            id: scene
             anchors.fill: parent
+            art: Qt.resolvedUrl("art/")
+            doc: false
+            bright: 0.7
             transform: Translate { x: root.jitter }
-            Image {
-                id: bg
-                anchors.fill: parent
-                source: config.background || "assets/background.png"
-                fillMode: Image.PreserveAspectCrop
-                horizontalAlignment: Image.AlignLeft
-                // slow drift, like a tape that never quite settles
-                SequentialAnimation on scale {
-                    loops: Animation.Infinite
-                    NumberAnimation { from: 1.0;   to: 1.018; duration: 16000; easing.type: Easing.InOutSine }
-                    NumberAnimation { from: 1.018; to: 1.0;   duration: 16000; easing.type: Easing.InOutSine }
-                }
-            }
-            // chroma bleed: a faint copy riding a few px to the right
-            Image {
-                anchors.fill: bg
-                transform: Translate { x: 3 * root.u }
-                source: bg.source; fillMode: bg.fillMode; horizontalAlignment: bg.horizontalAlignment
-                scale: bg.scale; opacity: 0.10
-            }
         }
-
-        // tape tear: a slice of the picture shoved sideways during a glitch
-        Item {
-            id: tear
-            visible: false
-            width: parent.width; height: 46 * root.u
-            clip: true
-            Image {
-                y: -tear.y; x: 28 * root.u
-                width: root.width; height: root.height
-                source: bg.source; fillMode: bg.fillMode; horizontalAlignment: bg.horizontalAlignment
-                scale: bg.scale
-            }
-            Rectangle { anchors.fill: parent; color: root.cFlesh; opacity: 0.06 }
-        }
-
-        Image { anchors.fill: parent; source: "assets/scanlines-1080.png"; smooth: false }
-        Image {
-            anchors.fill: parent; smooth: false; opacity: 0.55
-            source: "assets/noise_" + root.noiseFrame + ".png"
-        }
-        // rolling tracking band
-        Image {
-            id: band
-            width: parent.width; height: 90 * root.u
-            source: "assets/tracking.png"
-            opacity: 0.8
-            NumberAnimation on y { from: -120 * root.u; to: root.height + 40 * root.u; duration: 11000; loops: Animation.Infinite }
-        }
-        Image { anchors.fill: parent; source: "assets/vignette.png" }
     }
 
     // ---- glitch --------------------------------------------------------------
     SequentialAnimation {
         id: glitch
-        ScriptAction { script: { tear.y = (0.15 + Math.random() * 0.7) * root.height; tear.visible = true } }
+        ScriptAction { script: { scene.glitch = 1; scene.barSlip = (Math.random() < 0.5 ? -1 : 1) * 30 } }
         NumberAnimation { target: root; property: "jitter"; to: -9 * root.u; duration: 40 }
         NumberAnimation { target: root; property: "jitter"; to:  6 * root.u; duration: 50 }
-        ScriptAction { script: tear.y = (0.15 + Math.random() * 0.7) * root.height }
         NumberAnimation { target: root; property: "jitter"; to: -3 * root.u; duration: 40 }
         NumberAnimation { target: root; property: "jitter"; to:  0;          duration: 60 }
-        ScriptAction { script: tear.visible = false }
+        ScriptAction { script: { scene.glitch = 0; scene.barSlip = 0 } }
     }
     Timer {
         id: glitchClock
@@ -224,8 +173,8 @@ Item {
         Osd {
             id: mode
             size: 46
-            text: root.errorMsg.length ? "STOP ■" : (root.loginPending ? "FF ▶▶" : "PLAY ▶")
-            ink: root.errorMsg.length ? "#ffc2a3" : root.cTextHi
+            text: root.errorMsg.length ? "DENIED ■" : (root.loginPending ? "VERIFYING" : "[REDACTED]")
+            ink: root.errorMsg.length ? root.cTextHi : root.cTextHi
             glow: root.errorMsg.length ? root.cRec : root.cCrim
             // PLAY flashes for a while, like a deck that just engaged
             SequentialAnimation on opacity {
@@ -238,7 +187,7 @@ Item {
             }
         }
         Osd { anchors.top: mode.bottom; anchors.topMargin: 6 * root.u; size: 22; bold: false; ink: root.cText
-              text: (config.channel || "CH 03") + "   SP" }
+              text: (config.channel || "FILE 0x2133") }
 
         Column {
             anchors.right: parent.right
@@ -250,7 +199,7 @@ Item {
         Row {
             anchors.left: parent.left; anchors.bottom: parent.bottom
             spacing: 22 * root.u
-            Osd { size: 22; text: "CNT " + root.tapeCounter(root.counter) }
+            Osd { size: 22; text: "ELAPSED " + root.tapeCounter(root.counter) }
             Osd { size: 22; bold: false; ink: root.cDim; glow: root.cCrimDeep; text: "@ " + (sddm.hostName || "localhost").toUpperCase() }
         }
     }
@@ -309,7 +258,7 @@ Item {
                     model: field.secret ? Math.min(input.length, 24) : 0
                     Rectangle {
                         width: 9 * root.u; height: 18 * root.u
-                        color: index === input.length - 1 ? root.cCrimGlow : root.cCrim
+                        color: index === input.length - 1 ? root.cTextHi : root.cDim
                         opacity: 0.55 + 0.45 * ((index * 7) % 5) / 4
                     }
                 }
@@ -344,7 +293,7 @@ Item {
         width: label.implicitWidth + 36 * root.u; height: (primary ? 48 : 36) * root.u
         Rectangle {
             anchors.fill: parent; radius: 3 * root.u
-            color: btn.primary ? (btn.hot ? root.cCrimLo : root.cCrimDeep) : (btn.hot ? root.cRaised : Qt.rgba(0.09, 0.03, 0.04, 0.55))
+            color: btn.primary ? (btn.hot ? root.cCrimLo : root.cCrimDeep) : (btn.hot ? root.cRaised : Qt.rgba(0.05, 0.05, 0.05, 0.6))
             border.width: 1; border.color: btn.hot ? root.cCrimHi : (btn.primary ? root.cCrim : root.cEdge)
             Behavior on color { ColorAnimation { duration: 140 } }
         }
@@ -386,7 +335,7 @@ Item {
             id: glass
             anchors.fill: parent
             radius: 6 * root.u
-            color: Qt.rgba(0.082, 0.031, 0.035, 0.78)
+            color: Qt.rgba(0.035, 0.035, 0.035, 0.88)
             border.width: 1; border.color: root.cEdgeHi
             clip: true
             // scanlines inside the glass too
@@ -396,8 +345,8 @@ Item {
             Rectangle {
                 x: 8 * root.u; width: parent.width - 16 * root.u; y: 3; height: 28 * root.u
                 gradient: Gradient {
-                    GradientStop { position: 0; color: Qt.rgba(0.86, 0.12, 0.24, 0.20) }
-                    GradientStop { position: 1; color: Qt.rgba(0.86, 0.12, 0.24, 0) }
+                    GradientStop { position: 0; color: Qt.rgba(0.16, 0.16, 0.16, 0.25) }
+                    GradientStop { position: 1; color: Qt.rgba(0.16, 0.16, 0.16, 0) }
                 }
             }
         }
@@ -414,7 +363,7 @@ Item {
                 Osd { size: 32; text: "REDACTED"; anchors.verticalCenter: parent.verticalCenter }
             }
             Text {
-                text: config.tagline || "SIGNAL ACQUIRED  //  IDENTIFY"
+                text: config.tagline || "SUBJECT  //  IDENTIFY"
                 font.family: root.mono; font.pixelSize: 15 * root.u; font.letterSpacing: 3 * root.u
                 color: root.cDim
             }
@@ -457,7 +406,7 @@ Item {
                     id: play
                     primary: true
                     glyph: root.loginPending ? "▶▶" : "▶"
-                    text: root.loginPending ? "LOADING" : "PLAY"
+                    text: root.loginPending ? "VERIFYING" : "ENTER"
                     anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter
                     onClicked: root.doLogin()
                 }
@@ -488,9 +437,9 @@ Item {
         anchors.right: parent.right; anchors.bottom: parent.bottom
         anchors.margins: 52 * root.u
         spacing: 12 * root.u
-        Transport { glyph: "❚❚"; text: "PAUSE";  visible: sddm.canSuspend;  onClicked: sddm.suspend() }
-        Transport { glyph: "◀◀"; text: "REWIND"; visible: sddm.canReboot;   onClicked: sddm.reboot() }
-        Transport { glyph: "■";       text: "STOP";   visible: sddm.canPowerOff; onClicked: sddm.powerOff() }
+        Transport { glyph: "▮▮"; text: "SUSPEND";  visible: sddm.canSuspend;  onClicked: sddm.suspend() }
+        Transport { glyph: "↻"; text: "RESTART"; visible: sddm.canReboot;   onClicked: sddm.reboot() }
+        Transport { glyph: "■";       text: "SHUTDOWN";   visible: sddm.canPowerOff; onClicked: sddm.powerOff() }
     }
 
     // ---- CRT on / off --------------------------------------------------------

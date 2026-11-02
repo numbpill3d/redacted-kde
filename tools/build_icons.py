@@ -17,6 +17,14 @@ if OUT.exists():
 OUT.mkdir(parents=True)
 
 SWAP = {"#5294e2": P.grey(44), "#4877b1": P.grey(30), "#ffffff": P.grey(118)}
+def to_grey(h):
+    """any other colour (Tela's variant folders, emblems) -> a dim grey of the same luminance"""
+    r, g, b = P.rgb(h)
+    if max(r, g, b) - min(r, g, b) <= 3:
+        return h
+    return P.grey((0.2126 * r + 0.7152 * g + 0.0722 * b) * 0.5)
+
+
 dirs = []
 for d in sorted(SRC.glob("*/places")):
     rel = d.relative_to(SRC)
@@ -27,7 +35,7 @@ for d in sorted(SRC.glob("*/places")):
         if f.is_symlink() or f.suffix != ".svg":
             continue
         t = f.read_text()
-        t = re.sub(r"#[0-9a-fA-F]{6}\b", lambda m: SWAP.get(m.group(0).lower(), m.group(0)), t)
+        t = re.sub(r"#[0-9a-fA-F]{6}\b", lambda m: SWAP.get(m.group(0).lower(), to_grey(m.group(0))), t)
         f.write_text(t)
 
 # drop links into dirs we don't copy (devices/, actions/): Tela supplies those via Inherits

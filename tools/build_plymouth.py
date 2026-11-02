@@ -12,8 +12,7 @@ OUT = R / "plymouth/redacted"
 OUT.mkdir(parents=True, exist_ok=True)
 for f in OUT.glob("*.png"):
     f.unlink()
-FB = str(R / "sddm/redacted/fonts/TerminessNerdFontMono-Bold.ttf")
-FR = str(R / "sddm/redacted/fonts/TerminessNerdFontMono-Regular.ttf")
+FB = FR = str(R / "sddm/redacted/art/DepartureMono.otf")
 
 def osd(text, size, ink=P.TEXT_HI, glow=P.ACCENT, bold=True, spacing=2, glow_a=150):
     f = ImageFont.truetype(FB if bold else FR, size)
@@ -38,32 +37,44 @@ def osd(text, size, ink=P.TEXT_HI, glow=P.ACCENT, bold=True, spacing=2, glow_a=1
 def save(im, name):
     im.save(OUT / name, optimize=True)
 
-# background with scanlines + vignette baked in
-bg = Image.open(A / "background.png").convert("RGBA")
-bg = Image.eval(bg, lambda v: v)  # copy
-dimmer = Image.new("RGBA", bg.size, (0, 0, 0, 70))
-bg.alpha_composite(dimmer)
-bg.alpha_composite(Image.open(A / "scanlines-1080.png"))
-bg.alpha_composite(Image.open(A / "vignette.png"))
-bg.convert("RGB").save(OUT / "bg.png", optimize=True)
+# background: the still wallpaper, dimmed (it already carries scanlines + static)
+Image.open(A / "wallpaper-dim.png").convert("RGB").save(OUT / "bg.png", optimize=True)
 
+# grey static frames, a soft rolling band, a faint grey glow
+import random
+rnd = random.Random(77)
 for i in range(4):
-    shutil.copy(A / f"noise_{i}.png", OUT / f"noise_{i}.png")
-shutil.copy(A / "tracking.png", OUT / "tracking.png")
-shutil.copy(A / "glow.png", OUT / "glow.png")
+    im = Image.new("RGBA", (480, 270), (0, 0, 0, 0)); px = im.load()
+    for _ in range(int(480 * 270 * 0.03)):
+        v = rnd.randint(60, 170)
+        px[rnd.randrange(480), rnd.randrange(270)] = (v, v, v, rnd.randint(12, 46))
+    im.resize((1920, 1080), Image.NEAREST).save(OUT / f"noise_{i}.png", optimize=True)
+band = Image.new("RGBA", (1920, 90), (0, 0, 0, 0)); d = ImageDraw.Draw(band)
+for y in range(90):
+    a = 1 - abs(y - 45) / 45
+    d.line([(0, y), (1919, y)], fill=(160, 160, 160, int(16 * a * a)))
+band.save(OUT / "tracking.png", optimize=True)
+g = Image.new("RGBA", (256, 256), (0, 0, 0, 0)); gp = g.load()
+for y in range(256):
+    for x in range(256):
+        dd = ((x - 128) ** 2 + (y - 128) ** 2) ** .5 / 128
+        if dd < 1:
+            gp[x, y] = (34, 34, 34, int(255 * (1 - dd) ** 2.2))
+g.save(OUT / "glow.png")
 
-save(osd("PLAY ▶", 46), "osd_play.png")
-save(osd("STOP ■", 46, ink="#ffc2a3", glow=P.NEGATIVE), "osd_stop.png")
-save(osd("REW ◀◀", 46), "osd_rew.png")
-save(osd("CH 03   SP", 22, ink=P.TEXT, bold=False), "osd_ch.png")
-save(osd("CNT", 22), "osd_cnt.png")
+GLOW = P.grey(40)
+save(osd("[REDACTED]", 46, glow=GLOW), "osd_play.png")
+save(osd("WITHDRAWN ■", 46, glow=GLOW), "osd_stop.png")
+save(osd("RESTARTING", 46, glow=GLOW), "osd_rew.png")
+save(osd("FILE 0x2133", 22, ink=P.TEXT, glow=GLOW, bold=False), "osd_ch.png")
+save(osd("ELAPSED", 22, glow=GLOW), "osd_cnt.png")
 for ch, name in list(zip("0123456789", [f"d{i}" for i in range(10)])) + [(":", "dcolon")]:
-    save(osd(ch, 22, spacing=0), f"{name}.png")
+    save(osd(ch, 22, glow=GLOW, spacing=0), f"{name}.png")
 
-save(osd("REDACTED", 64, glow_a=190, spacing=6), "logo.png")
-save(osd("LOADING TAPE", 18, ink=P.TEXT_DIM, glow=P.ACCENT_DEEP, bold=False, spacing=5, glow_a=90), "cap_boot.png")
-save(osd("EJECTING TAPE", 18, ink=P.TEXT_DIM, glow=P.ACCENT_DEEP, bold=False, spacing=5, glow_a=90), "cap_halt.png")
-save(osd("PASSWORD", 18, ink=P.ACCENT_HI, glow=P.ACCENT_DEEP, bold=False, spacing=5, glow_a=90), "cap_pw.png")
+save(osd("REDACTED", 64, glow=GLOW, glow_a=190, spacing=6), "logo.png")
+save(osd("RESTORING SUBJECT", 18, ink=P.TEXT_DIM, glow=P.ACCENT_DEEP, bold=False, spacing=5, glow_a=90), "cap_boot.png")
+save(osd("WITHDRAWING SUBJECT", 18, ink=P.TEXT_DIM, glow=P.ACCENT_DEEP, bold=False, spacing=5, glow_a=90), "cap_halt.png")
+save(osd("PASSWORD", 18, ink=P.TEXT_DIM, glow=P.ACCENT_DEEP, bold=False, spacing=5, glow_a=90), "cap_pw.png")
 
 # tape-block progress bar: 32 blocks
 N, BW, BH, GAP = 32, 11, 20, 5
@@ -73,7 +84,7 @@ def blocks(lit):
     d = ImageDraw.Draw(im)
     for i in range(N):
         x = 8 + i * (BW + GAP)
-        c = P.rgb(P.ACCENT if lit else P.EDGE) + (255 if lit else 200,)
+        c = P.rgb(P.grey(58) if lit else P.grey(18)) + (255 if lit else 200,)
         d.rectangle([x, 8, x + BW - 1, 8 + BH - 1], fill=c)
     if lit:
         g = im.filter(ImageFilter.GaussianBlur(4))
@@ -81,7 +92,7 @@ def blocks(lit):
         d2 = ImageDraw.Draw(out)
         for i in range(N):   # hot top edge on every block
             x = 8 + i * (BW + GAP)
-            d2.line([x, 8, x + BW - 1, 8], fill=P.rgb(P.ACCENT_GLOW) + (255,))
+            d2.line([x, 8, x + BW - 1, 8], fill=P.rgb(P.grey(120)) + (255,))
         return out
     return im
 save(blocks(False), "bar_dim.png")
@@ -90,9 +101,9 @@ save(blocks(True), "bar_lit.png")
 # password plate + block bullet
 pw = Image.new("RGBA", (520, 58), (0, 0, 0, 0))
 d = ImageDraw.Draw(pw)
-d.rounded_rectangle([4, 4, 515, 53], 4, fill=P.rgb(P.ABYSS) + (235,), outline=P.rgb(P.ACCENT) + (255,))
+d.rounded_rectangle([4, 4, 515, 53], 4, fill=P.rgb(P.ABYSS) + (235,), outline=P.rgb(P.grey(40)) + (255,))
 g = pw.filter(ImageFilter.GaussianBlur(3)); plate = Image.new("RGBA", pw.size, (0, 0, 0, 0)); plate.alpha_composite(g); plate.alpha_composite(pw)
 save(plate, "pw_plate.png")
-b = Image.new("RGBA", (13, 22), (0, 0, 0, 0)); ImageDraw.Draw(b).rectangle([2, 2, 10, 19], fill=P.rgb(P.ACCENT_HI) + (255,))
+b = Image.new("RGBA", (13, 22), (0, 0, 0, 0)); ImageDraw.Draw(b).rectangle([2, 2, 10, 19], fill=P.rgb(P.TEXT) + (255,))
 save(b, "bullet.png")
 print("plymouth assets ->", OUT)

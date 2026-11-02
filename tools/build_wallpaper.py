@@ -79,6 +79,8 @@ def quad(l, t):
 d.polygon(quad(L, T), fill=(0, 0, 0))
 d.line(quad(L, T)[:2], fill=P.rgb(P.ACCENT_GLOW), width=1)
 
+plain = img.copy()   # no document: behind boot/login UI
+
 # the empty dark: a redacted document, bars only a few levels above black
 x0, y = 1260, 250
 for i in range(22):
@@ -91,21 +93,26 @@ for i in range(22):
         d.rectangle([x0 + w + 10, y + 5, x0 + w + 10 + rnd.randint(20, 60), y + 8], fill=P.rgb(P.grey(lvl + 10)))
     y += 26
 
-# static: sparse grey grain + a few dropout streaks
-px = img.load()
-for _ in range(int(W * H * 0.012)):
-    x, yy = rnd.randrange(W), rnd.randrange(H)
-    g = rnd.randint(18, 70)
-    o = px[x, yy][0]
-    px[x, yy] = (max(o, g),) * 3
-for _ in range(14):
-    yy = rnd.randrange(H); x = rnd.randrange(W); l = rnd.randint(60, 420)
-    d.line([(x, yy), (min(W - 1, x + l), yy)], fill=P.rgb(P.grey(rnd.randint(24, 44))))
+# static: sparse grey grain + a few dropout streaks (same grain on both versions)
+state = rnd.getstate()
+def add_static(img):
+    rnd.setstate(state)
+    d = ImageDraw.Draw(img)
+    px = img.load()
+    for _ in range(int(W * H * 0.012)):
+        x, yy = rnd.randrange(W), rnd.randrange(H)
+        g = rnd.randint(18, 70)
+        o = px[x, yy][0]
+        px[x, yy] = (max(o, g),) * 3
+    for _ in range(14):
+        yy = rnd.randrange(H); x = rnd.randrange(W); l = rnd.randint(60, 420)
+        d.line([(x, yy), (min(W - 1, x + l), yy)], fill=P.rgb(P.grey(rnd.randint(24, 44))))
+add_static(img); add_static(plain)
 
 img.save(A / "wallpaper.png", optimize=True)
 for w, h in ((2560, 1440), (3840, 2160)):
     img.resize((w, h), Image.NEAREST).save(A / f"wallpaper-{w}x{h}.png", optimize=True)
 
-# a dimmer copy for behind login / lock UI
-Image.fromarray((np.asarray(img).astype(np.float32) * 0.6).astype(np.uint8)).save(A / "wallpaper-dim.png", optimize=True)
+# a dimmer copy without the document, for behind boot UI
+Image.fromarray((np.asarray(plain).astype(np.float32) * 0.6).astype(np.uint8)).save(A / "wallpaper-dim.png", optimize=True)
 print("wallpaper ->", A / "wallpaper.png")

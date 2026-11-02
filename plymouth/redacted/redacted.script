@@ -1,11 +1,11 @@
 # redacted — Plymouth boot splash
-# The wallpaper face as a tape on playback: scanlines + vignette are baked into
-# bg.png; grain frames swap, a tracking band rolls, PLAY blinks, a tape counter
-# runs. Progress is a strip of tape blocks. Everything is pre-rendered
+# The censored face under static: bg.png is the dimmed still wallpaper; grey
+# grain frames swap, a soft band rolls, the label blinks, an elapsed counter
+# runs. Progress is a strip of censor blocks. Everything is pre-rendered
 # (tools/build_plymouth.py). Authored for 1080p, scaled by window height.
 
-Window.SetBackgroundTopColor(0.039, 0.012, 0.016);
-Window.SetBackgroundBottomColor(0.039, 0.012, 0.016);
+Window.SetBackgroundTopColor(0.008, 0.008, 0.008);
+Window.SetBackgroundBottomColor(0.008, 0.008, 0.008);
 
 W = Window.GetWidth();
 H = Window.GetHeight();
@@ -166,7 +166,7 @@ Plymouth.SetDisplayNormalFunction(normal_callback);
 # ---- messages -----------------------------------------------------------------
 message_sprite = Sprite();
 fun message_callback(text) {
-    local.img = Image.Text(text, 0.64, 0.55, 1.0);
+    local.img = Image.Text(text, 0.6, 0.6, 0.6);
     message_sprite.SetImage(img);
     message_sprite.SetPosition(global.PX - img.GetWidth() / 2, global.OY + global.H * 0.9, 12);
 }
