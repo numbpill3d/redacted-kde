@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="88" height="121" viewBox="0 0 88 121">
+<defs>
+<linearGradient id="shaL" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#131313" stop-opacity="0.3"/><stop offset="0.22" stop-color="#131313" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<linearGradient id="shaR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#131313" stop-opacity="0.3"/><stop offset="0.22" stop-color="#131313" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<linearGradient id="shaT" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#131313" stop-opacity="0.3"/><stop offset="0.22" stop-color="#131313" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<linearGradient id="shaB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#131313" stop-opacity="0.3"/><stop offset="0.22" stop-color="#131313" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<radialGradient id="shaTL" gradientUnits="userSpaceOnUse" cx="20" cy="20" r="20"><stop offset="0" stop-color="#131313" stop-opacity="0.3"/><stop offset="0.22" stop-color="#131313" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<radialGradient id="shaTR" gradientUnits="userSpaceOnUse" cx="68" cy="20" r="20"><stop offset="0" stop-color="#131313" stop-opacity="0.3"/><stop offset="0.22" stop-color="#131313" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<radialGradient id="shaBL" gradientUnits="userSpaceOnUse" cx="20" cy="101" r="20"><stop offset="0" stop-color="#131313" stop-opacity="0.3"/><stop offset="0.22" stop-color="#131313" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<radialGradient id="shaBR" gradientUnits="userSpaceOnUse" cx="68" cy="101" r="20"><stop offset="0" stop-color="#131313" stop-opacity="0.3"/><stop offset="0.22" stop-color="#131313" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="shiL" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="0.22" stop-color="#000" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<linearGradient id="shiR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="0.22" stop-color="#000" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<linearGradient id="shiT" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="0.22" stop-color="#000" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<linearGradient id="shiB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="0.22" stop-color="#000" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+<radialGradient id="shiTL" gradientUnits="userSpaceOnUse" cx="20" cy="20" r="20"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="0.22" stop-color="#000" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<radialGradient id="shiTR" gradientUnits="userSpaceOnUse" cx="68" cy="20" r="20"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="0.22" stop-color="#000" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<radialGradient id="shiBL" gradientUnits="userSpaceOnUse" cx="20" cy="101" r="20"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="0.22" stop-color="#000" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<radialGradient id="shiBR" gradientUnits="userSpaceOnUse" cx="68" cy="101" r="20"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="0.22" stop-color="#000" stop-opacity="0.13"/><stop offset="0.5" stop-color="#000" stop-opacity="0.14"/><stop offset="0.8" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="barA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#111111" stop-opacity="1"/><stop offset="0.55" stop-color="#0c0c0c" stop-opacity="1"/><stop offset="1" stop-color="#0a0a0a" stop-opacity="1"/></linearGradient>
+<linearGradient id="barI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0c0c" stop-opacity="1"/><stop offset="1" stop-color="#0a0a0a" stop-opacity="1"/></linearGradient>
+<linearGradient id="seam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1a1a" stop-opacity="0"/><stop offset="0.55" stop-color="#1a1a1a" stop-opacity="0.1"/><stop offset="0.85" stop-color="#1a1a1a" stop-opacity="0.3"/><stop offset="1" stop-color="#1a1a1a" stop-opacity="0.55"/></linearGradient>
+<linearGradient id="seamI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.25"/></linearGradient>
+<linearGradient id="stud" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#969696" stop-opacity="1"/><stop offset="0.5" stop-color="#151515" stop-opacity="1"/><stop offset="1" stop-color="#141414" stop-opacity="1"/></linearGradient>
+</defs>
+<g id="decoration-center">
+<rect x="23" y="56" width="42" height="42" fill="#0a0a0a" />
+</g>
+<g id="decoration-top">
+<rect x="23" y="0" width="42" height="20" fill="url(#shaT)" />
+<rect x="23" y="20" width="42" height="36" fill="url(#barA)" />
+<image x="23" y="20" width="42" height="36" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAACa0lEQVR4nO2YSYviUBSFz6q7yy7LWNaPNaALUTEgKoaguBARE8QJFZ+4CQ9BURdOOEA0+TG96RaNGjOo1U31tzLPN3Jzzz0v0DTtBx5Av99n9G3xeNwNAI1G4yFrGlKpVFxG/4fD4Td9m6qqLwAgSdKL4w1st9vnn/pfhVL6zdbA9Xrt+fN7t9udhfTp1Ot1r5Px1WrV9iGy2ey7k7W/JqqqGiqFIaVS6SAVPM/7AGC5XNp6Bebz+UXZEUXRXnL85wKUUne73Xbr26PRKKNvi8fjB3UZDodnYywxmUxuZmckErlfqKfTqbMd61iv1z/N9JvP5/YTShAEV7lcZm71I4Q40tmnUCqVPo6fV6uV51pfM6RSqdfjZ1mWX6/1/XQymczft7lisWjf2kmS5LvjXgAAsVjM+3vui3YxnU5/v/eaN1EU5R0ABEGwdeDRaOTcQJuhVqsZSs1isTD9DnIcZ0reDrAsa7i4LMvWJjTA7/ebt4WFQsEwbIFAwPCdopSejN/v9zcrFyHEBQD5fN78RoPB4MMMqyiKz7t/jcdjy6FmWdaby+WuJspsNjuJQrFYtFc8KKVvrVbLUk2+dX0+JplMWvcZhJC7JYcVqtUqAwCapjGfsf5jicVihgk1HA7vXsEAgOd5j94gRyKRg/nhOO56QUgkEqZEutvtXkwAlmUfcqivR6PRsF23B4PBSfgVRTGvOJ1OxwUAoVDIkUEmhFgS/cViwQCAqqqXJazX6zl2MvV6nXE6x9Po9/v2L28AZFlmTHcWRfFq5lYqlTNV2Gw2PgDgOO6xX/qWy6Xle7ggCJYrWrPZtGyAfgGRqtINdCIQ0AAAAABJRU5ErkJggg==" opacity="1"/>
+<rect x="23" y="20" width="42" height="1" fill="#1a1a1a" />
+<rect x="23" y="44" width="42" height="12" fill="url(#seam)" />
+<rect x="23" y="55" width="42" height="1" fill="#1a1a1a" />
+</g>
+<g id="decoration-bottom">
+<rect x="23" y="101" width="42" height="20" fill="url(#shaB)" />
+<rect x="23" y="98" width="42" height="3" fill="#0a0a0a" />
+<rect x="23" y="98" width="42" height="1" fill="#020202" />
+<rect x="23" y="100" width="42" height="1" fill="#151515" />
+</g>
+<g id="decoration-left">
+<rect x="0" y="56" width="20" height="42" fill="url(#shaL)" />
+<rect x="20" y="56" width="3" height="42" fill="#0a0a0a" />
+<rect x="20" y="56" width="1" height="42" fill="#151515" />
+<rect x="22" y="56" width="1" height="42" fill="#020202" />
+</g>
+<g id="decoration-right">
+<rect x="68" y="56" width="20" height="42" fill="url(#shaR)" />
+<rect x="65" y="56" width="3" height="42" fill="#0a0a0a" />
+<rect x="67" y="56" width="1" height="42" fill="#151515" />
+<rect x="65" y="56" width="1" height="42" fill="#020202" />
+</g>
+<g id="decoration-topleft">
+<rect x="0" y="0" width="20" height="20" fill="url(#shaTL)" />
+<rect x="20" y="0" width="3" height="20" fill="url(#shaT)" />
+<rect x="0" y="20" width="20" height="36" fill="url(#shaL)" />
+<rect x="20" y="20" width="3" height="36" fill="url(#barA)" />
+<image x="20" y="20" width="3" height="36" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAACa0lEQVR4nO2YSYviUBSFz6q7yy7LWNaPNaALUTEgKoaguBARE8QJFZ+4CQ9BURdOOEA0+TG96RaNGjOo1U31tzLPN3Jzzz0v0DTtBx5Av99n9G3xeNwNAI1G4yFrGlKpVFxG/4fD4Td9m6qqLwAgSdKL4w1st9vnn/pfhVL6zdbA9Xrt+fN7t9udhfTp1Ot1r5Px1WrV9iGy2ey7k7W/JqqqGiqFIaVS6SAVPM/7AGC5XNp6Bebz+UXZEUXRXnL85wKUUne73Xbr26PRKKNvi8fjB3UZDodnYywxmUxuZmckErlfqKfTqbMd61iv1z/N9JvP5/YTShAEV7lcZm71I4Q40tmnUCqVPo6fV6uV51pfM6RSqdfjZ1mWX6/1/XQymczft7lisWjf2kmS5LvjXgAAsVjM+3vui3YxnU5/v/eaN1EU5R0ABEGwdeDRaOTcQJuhVqsZSs1isTD9DnIcZ0reDrAsa7i4LMvWJjTA7/ebt4WFQsEwbIFAwPCdopSejN/v9zcrFyHEBQD5fN78RoPB4MMMqyiKz7t/jcdjy6FmWdaby+WuJspsNjuJQrFYtFc8KKVvrVbLUk2+dX0+JplMWvcZhJC7JYcVqtUqAwCapjGfsf5jicVihgk1HA7vXsEAgOd5j94gRyKRg/nhOO56QUgkEqZEutvtXkwAlmUfcqivR6PRsF23B4PBSfgVRTGvOJ1OxwUAoVDIkUEmhFgS/cViwQCAqqqXJazX6zl2MvV6nXE6x9Po9/v2L28AZFlmTHcWRfFq5lYqlTNV2Gw2PgDgOO6xX/qWy6Xle7ggCJYrWrPZtGyAfgGRqtINdCIQ0AAAAABJRU5ErkJggg==" opacity="1"/>
+<rect x="20" y="20" width="3" height="1" fill="#1a1a1a" />
+<rect x="20" y="44" width="3" height="12" fill="url(#seam)" />
+<rect x="20" y="55" width="3" height="1" fill="#1a1a1a" />
+<rect x="20" y="20" width="1" height="36" fill="#1a1a1a" />
+</g>
+<g id="decoration-topright">
+<rect x="68" y="0" width="20" height="20" fill="url(#shaTR)" />
+<rect x="65" y="0" width="3" height="20" fill="url(#shaT)" />
+<rect x="68" y="20" width="20" height="36" fill="url(#shaR)" />
+<rect x="65" y="20" width="3" height="36" fill="url(#barA)" />
+<image x="65" y="20" width="3" height="36" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAACa0lEQVR4nO2YSYviUBSFz6q7yy7LWNaPNaALUTEgKoaguBARE8QJFZ+4CQ9BURdOOEA0+TG96RaNGjOo1U31tzLPN3Jzzz0v0DTtBx5Av99n9G3xeNwNAI1G4yFrGlKpVFxG/4fD4Td9m6qqLwAgSdKL4w1st9vnn/pfhVL6zdbA9Xrt+fN7t9udhfTp1Ot1r5Px1WrV9iGy2ey7k7W/JqqqGiqFIaVS6SAVPM/7AGC5XNp6Bebz+UXZEUXRXnL85wKUUne73Xbr26PRKKNvi8fjB3UZDodnYywxmUxuZmckErlfqKfTqbMd61iv1z/N9JvP5/YTShAEV7lcZm71I4Q40tmnUCqVPo6fV6uV51pfM6RSqdfjZ1mWX6/1/XQymczft7lisWjf2kmS5LvjXgAAsVjM+3vui3YxnU5/v/eaN1EU5R0ABEGwdeDRaOTcQJuhVqsZSs1isTD9DnIcZ0reDrAsa7i4LMvWJjTA7/ebt4WFQsEwbIFAwPCdopSejN/v9zcrFyHEBQD5fN78RoPB4MMMqyiKz7t/jcdjy6FmWdaby+WuJspsNjuJQrFYtFc8KKVvrVbLUk2+dX0+JplMWvcZhJC7JYcVqtUqAwCapjGfsf5jicVihgk1HA7vXsEAgOd5j94gRyKRg/nhOO56QUgkEqZEutvtXkwAlmUfcqivR6PRsF23B4PBSfgVRTGvOJ1OxwUAoVDIkUEmhFgS/cViwQCAqqqXJazX6zl2MvV6nXE6x9Po9/v2L28AZFlmTHcWRfFq5lYqlTNV2Gw2PgDgOO6xX/qWy6Xle7ggCJYrWrPZtGyAfgGRqtINdCIQ0AAAAABJRU5ErkJggg==" opacity="1"/>
+<rect x="65" y="20" width="3" height="1" fill="#1a1a1a" />
+<rect x="65" y="44" width="3" height="12" fill="url(#seam)" />
+<rect x="65" y="55" width="3" height="1" fill="#1a1a1a" />
+<rect x="67" y="20" width="1" height="36" fill="#1a1a1a" />
+</g>
+<g id="decoration-bottomleft">
+<rect x="0" y="101" width="20" height="20" fill="url(#shaBL)" />
+<rect x="20" y="101" width="3" height="20" fill="url(#shaB)" />
+<rect x="0" y="98" width="20" height="3" fill="url(#shaL)" />
+<rect x="20" y="98" width="3" height="3" fill="#0a0a0a" />
+<rect x="20" y="98" width="1" height="3" fill="#151515" />
+<rect x="22" y="98" width="1" height="3" fill="#020202" />
+<rect x="20" y="100" width="3" height="1" fill="#151515" />
+</g>
+<g id="decoration-bottomright">
+<rect x="68" y="101" width="20" height="20" fill="url(#shaBR)" />
+<rect x="65" y="101" width="3" height="20" fill="url(#shaB)" />
+<rect x="68" y="98" width="20" height="3" fill="url(#shaR)" />
+<rect x="65" y="98" width="3" height="3" fill="#0a0a0a" />
+<rect x="67" y="98" width="1" height="3" fill="#151515" />
+<rect x="65" y="98" width="1" height="3" fill="#020202" />
+<rect x="65" y="100" width="3" height="1" fill="#151515" />
+</g>
+<g id="decoration-inactive-center">
+<rect x="23" y="56" width="42" height="42" fill="#0a0a0a" />
+</g>
+<g id="decoration-inactive-top">
+<rect x="23" y="0" width="42" height="20" fill="url(#shiT)" />
+<rect x="23" y="20" width="42" height="36" fill="url(#barI)" />
+<image x="23" y="20" width="42" height="36" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAACa0lEQVR4nO2YSYviUBSFz6q7yy7LWNaPNaALUTEgKoaguBARE8QJFZ+4CQ9BURdOOEA0+TG96RaNGjOo1U31tzLPN3Jzzz0v0DTtBx5Av99n9G3xeNwNAI1G4yFrGlKpVFxG/4fD4Td9m6qqLwAgSdKL4w1st9vnn/pfhVL6zdbA9Xrt+fN7t9udhfTp1Ot1r5Px1WrV9iGy2ey7k7W/JqqqGiqFIaVS6SAVPM/7AGC5XNp6Bebz+UXZEUXRXnL85wKUUne73Xbr26PRKKNvi8fjB3UZDodnYywxmUxuZmckErlfqKfTqbMd61iv1z/N9JvP5/YTShAEV7lcZm71I4Q40tmnUCqVPo6fV6uV51pfM6RSqdfjZ1mWX6/1/XQymczft7lisWjf2kmS5LvjXgAAsVjM+3vui3YxnU5/v/eaN1EU5R0ABEGwdeDRaOTcQJuhVqsZSs1isTD9DnIcZ0reDrAsa7i4LMvWJjTA7/ebt4WFQsEwbIFAwPCdopSejN/v9zcrFyHEBQD5fN78RoPB4MMMqyiKz7t/jcdjy6FmWdaby+WuJspsNjuJQrFYtFc8KKVvrVbLUk2+dX0+JplMWvcZhJC7JYcVqtUqAwCapjGfsf5jicVihgk1HA7vXsEAgOd5j94gRyKRg/nhOO56QUgkEqZEutvtXkwAlmUfcqivR6PRsF23B4PBSfgVRTGvOJ1OxwUAoVDIkUEmhFgS/cViwQCAqqqXJazX6zl2MvV6nXE6x9Po9/v2L28AZFlmTHcWRfFq5lYqlTNV2Gw2PgDgOO6xX/qWy6Xle7ggCJYrWrPZtGyAfgGRqtINdCIQ0AAAAABJRU5ErkJggg==" opacity="0.5"/>
+<rect x="23" y="20" width="42" height="1" fill="#111111" />
+<rect x="23" y="44" width="42" height="12" fill="url(#seamI)" />
+<rect x="23" y="55" width="42" height="1" fill="#111111" opacity="0.8"/>
+</g>
+<g id="decoration-inactive-bottom">
+<rect x="23" y="101" width="42" height="20" fill="url(#shiB)" />
+<rect x="23" y="98" width="42" height="3" fill="#090909" />
+<rect x="23" y="98" width="42" height="1" fill="#020202" />
+<rect x="23" y="100" width="42" height="1" fill="#111111" />
+</g>
+<g id="decoration-inactive-left">
+<rect x="0" y="56" width="20" height="42" fill="url(#shiL)" />
+<rect x="20" y="56" width="3" height="42" fill="#090909" />
+<rect x="20" y="56" width="1" height="42" fill="#111111" />
+<rect x="22" y="56" width="1" height="42" fill="#020202" />
+</g>
+<g id="decoration-inactive-right">
+<rect x="68" y="56" width="20" height="42" fill="url(#shiR)" />
+<rect x="65" y="56" width="3" height="42" fill="#090909" />
+<rect x="67" y="56" width="1" height="42" fill="#111111" />
+<rect x="65" y="56" width="1" height="42" fill="#020202" />
+</g>
+<g id="decoration-inactive-topleft">
+<rect x="0" y="0" width="20" height="20" fill="url(#shiTL)" />
+<rect x="20" y="0" width="3" height="20" fill="url(#shiT)" />
+<rect x="0" y="20" width="20" height="36" fill="url(#shiL)" />
+<rect x="20" y="20" width="3" height="36" fill="url(#barI)" />
+<image x="20" y="20" width="3" height="36" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAACa0lEQVR4nO2YSYviUBSFz6q7yy7LWNaPNaALUTEgKoaguBARE8QJFZ+4CQ9BURdOOEA0+TG96RaNGjOo1U31tzLPN3Jzzz0v0DTtBx5Av99n9G3xeNwNAI1G4yFrGlKpVFxG/4fD4Td9m6qqLwAgSdKL4w1st9vnn/pfhVL6zdbA9Xrt+fN7t9udhfTp1Ot1r5Px1WrV9iGy2ey7k7W/JqqqGiqFIaVS6SAVPM/7AGC5XNp6Bebz+UXZEUXRXnL85wKUUne73Xbr26PRKKNvi8fjB3UZDodnYywxmUxuZmckErlfqKfTqbMd61iv1z/N9JvP5/YTShAEV7lcZm71I4Q40tmnUCqVPo6fV6uV51pfM6RSqdfjZ1mWX6/1/XQymczft7lisWjf2kmS5LvjXgAAsVjM+3vui3YxnU5/v/eaN1EU5R0ABEGwdeDRaOTcQJuhVqsZSs1isTD9DnIcZ0reDrAsa7i4LMvWJjTA7/ebt4WFQsEwbIFAwPCdopSejN/v9zcrFyHEBQD5fN78RoPB4MMMqyiKz7t/jcdjy6FmWdaby+WuJspsNjuJQrFYtFc8KKVvrVbLUk2+dX0+JplMWvcZhJC7JYcVqtUqAwCapjGfsf5jicVihgk1HA7vXsEAgOd5j94gRyKRg/nhOO56QUgkEqZEutvtXkwAlmUfcqivR6PRsF23B4PBSfgVRTGvOJ1OxwUAoVDIkUEmhFgS/cViwQCAqqqXJazX6zl2MvV6nXE6x9Po9/v2L28AZFlmTHcWRfFq5lYqlTNV2Gw2PgDgOO6xX/qWy6Xle7ggCJYrWrPZtGyAfgGRqtINdCIQ0AAAAABJRU5ErkJggg==" opacity="0.5"/>
+<rect x="20" y="20" width="3" height="1" fill="#111111" />
+<rect x="20" y="44" width="3" height="12" fill="url(#seamI)" />
+<rect x="20" y="55" width="3" height="1" fill="#111111" opacity="0.8"/>
+<rect x="20" y="20" width="1" height="36" fill="#111111" />
+</g>
+<g id="decoration-inactive-topright">
+<rect x="68" y="0" width="20" height="20" fill="url(#shiTR)" />
+<rect x="65" y="0" width="3" height="20" fill="url(#shiT)" />
+<rect x="68" y="20" width="20" height="36" fill="url(#shiR)" />
+<rect x="65" y="20" width="3" height="36" fill="url(#barI)" />
+<image x="65" y="20" width="3" height="36" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAACa0lEQVR4nO2YSYviUBSFz6q7yy7LWNaPNaALUTEgKoaguBARE8QJFZ+4CQ9BURdOOEA0+TG96RaNGjOo1U31tzLPN3Jzzz0v0DTtBx5Av99n9G3xeNwNAI1G4yFrGlKpVFxG/4fD4Td9m6qqLwAgSdKL4w1st9vnn/pfhVL6zdbA9Xrt+fN7t9udhfTp1Ot1r5Px1WrV9iGy2ey7k7W/JqqqGiqFIaVS6SAVPM/7AGC5XNp6Bebz+UXZEUXRXnL85wKUUne73Xbr26PRKKNvi8fjB3UZDodnYywxmUxuZmckErlfqKfTqbMd61iv1z/N9JvP5/YTShAEV7lcZm71I4Q40tmnUCqVPo6fV6uV51pfM6RSqdfjZ1mWX6/1/XQymczft7lisWjf2kmS5LvjXgAAsVjM+3vui3YxnU5/v/eaN1EU5R0ABEGwdeDRaOTcQJuhVqsZSs1isTD9DnIcZ0reDrAsa7i4LMvWJjTA7/ebt4WFQsEwbIFAwPCdopSejN/v9zcrFyHEBQD5fN78RoPB4MMMqyiKz7t/jcdjy6FmWdaby+WuJspsNjuJQrFYtFc8KKVvrVbLUk2+dX0+JplMWvcZhJC7JYcVqtUqAwCapjGfsf5jicVihgk1HA7vXsEAgOd5j94gRyKRg/nhOO56QUgkEqZEutvtXkwAlmUfcqivR6PRsF23B4PBSfgVRTGvOJ1OxwUAoVDIkUEmhFgS/cViwQCAqqqXJazX6zl2MvV6nXE6x9Po9/v2L28AZFlmTHcWRfFq5lYqlTNV2Gw2PgDgOO6xX/qWy6Xle7ggCJYrWrPZtGyAfgGRqtINdCIQ0AAAAABJRU5ErkJggg==" opacity="0.5"/>
+<rect x="65" y="20" width="3" height="1" fill="#111111" />
+<rect x="65" y="44" width="3" height="12" fill="url(#seamI)" />
+<rect x="65" y="55" width="3" height="1" fill="#111111" opacity="0.8"/>
+<rect x="67" y="20" width="1" height="36" fill="#111111" />
+</g>
+<g id="decoration-inactive-bottomleft">
+<rect x="0" y="101" width="20" height="20" fill="url(#shiBL)" />
+<rect x="20" y="101" width="3" height="20" fill="url(#shiB)" />
+<rect x="0" y="98" width="20" height="3" fill="url(#shiL)" />
+<rect x="20" y="98" width="3" height="3" fill="#090909" />
+<rect x="20" y="98" width="1" height="3" fill="#111111" />
+<rect x="22" y="98" width="1" height="3" fill="#020202" />
+<rect x="20" y="100" width="3" height="1" fill="#111111" />
+</g>
+<g id="decoration-inactive-bottomright">
+<rect x="68" y="101" width="20" height="20" fill="url(#shiBR)" />
+<rect x="65" y="101" width="3" height="20" fill="url(#shiB)" />
+<rect x="68" y="98" width="20" height="3" fill="url(#shiR)" />
+<rect x="65" y="98" width="3" height="3" fill="#090909" />
+<rect x="67" y="98" width="1" height="3" fill="#111111" />
+<rect x="65" y="98" width="1" height="3" fill="#020202" />
+<rect x="65" y="100" width="3" height="1" fill="#111111" />
+</g>
+<g id="mask-center"><rect x="23" y="56" width="42" height="42" fill="#000" opacity="0"/><rect x="23" y="56" width="42" height="42" fill="#fff" /></g>
+<g id="mask-top"><rect x="23" y="0" width="42" height="56" fill="#000" opacity="0"/><rect x="23" y="20" width="42" height="36" fill="#fff" /></g>
+<g id="mask-bottom"><rect x="23" y="98" width="42" height="23" fill="#000" opacity="0"/><rect x="23" y="98" width="42" height="3" fill="#fff" /></g>
+<g id="mask-left"><rect x="0" y="56" width="23" height="42" fill="#000" opacity="0"/><rect x="20" y="56" width="3" height="42" fill="#fff" /></g>
+<g id="mask-right"><rect x="65" y="56" width="23" height="42" fill="#000" opacity="0"/><rect x="65" y="56" width="3" height="42" fill="#fff" /></g>
+<g id="mask-topleft"><rect x="0" y="0" width="23" height="56" fill="#000" opacity="0"/><rect x="20" y="20" width="3" height="36" fill="#fff" /></g>
+<g id="mask-topright"><rect x="65" y="0" width="23" height="56" fill="#000" opacity="0"/><rect x="65" y="20" width="3" height="36" fill="#fff" /></g>
+<g id="mask-bottomleft"><rect x="0" y="98" width="23" height="23" fill="#000" opacity="0"/><rect x="20" y="98" width="3" height="3" fill="#fff" /></g>
+<g id="mask-bottomright"><rect x="65" y="98" width="23" height="23" fill="#000" opacity="0"/><rect x="65" y="98" width="3" height="3" fill="#fff" /></g>
+<rect id="hint-stretch-borders" x="0" y="0" width="1" height="1" fill="none"/>
+<rect id="decoration-maximized-hint-tile-center" x="0" y="0" width="1" height="1" fill="none"/>
+<rect id="decoration-maximized-inactive-hint-tile-center" x="0" y="0" width="1" height="1" fill="none"/>
+<g id="decoration-maximized-center"><rect x="0" y="0" width="42" height="36" fill="url(#barA)" /><image x="0" y="0" width="42" height="36" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAACa0lEQVR4nO2YSYviUBSFz6q7yy7LWNaPNaALUTEgKoaguBARE8QJFZ+4CQ9BURdOOEA0+TG96RaNGjOo1U31tzLPN3Jzzz0v0DTtBx5Av99n9G3xeNwNAI1G4yFrGlKpVFxG/4fD4Td9m6qqLwAgSdKL4w1st9vnn/pfhVL6zdbA9Xrt+fN7t9udhfTp1Ot1r5Px1WrV9iGy2ey7k7W/JqqqGiqFIaVS6SAVPM/7AGC5XNp6Bebz+UXZEUXRXnL85wKUUne73Xbr26PRKKNvi8fjB3UZDodnYywxmUxuZmckErlfqKfTqbMd61iv1z/N9JvP5/YTShAEV7lcZm71I4Q40tmnUCqVPo6fV6uV51pfM6RSqdfjZ1mWX6/1/XQymczft7lisWjf2kmS5LvjXgAAsVjM+3vui3YxnU5/v/eaN1EU5R0ABEGwdeDRaOTcQJuhVqsZSs1isTD9DnIcZ0reDrAsa7i4LMvWJjTA7/ebt4WFQsEwbIFAwPCdopSejN/v9zcrFyHEBQD5fN78RoPB4MMMqyiKz7t/jcdjy6FmWdaby+WuJspsNjuJQrFYtFc8KKVvrVbLUk2+dX0+JplMWvcZhJC7JYcVqtUqAwCapjGfsf5jicVihgk1HA7vXsEAgOd5j94gRyKRg/nhOO56QUgkEqZEutvtXkwAlmUfcqivR6PRsF23B4PBSfgVRTGvOJ1OxwUAoVDIkUEmhFgS/cViwQCAqqqXJazX6zl2MvV6nXE6x9Po9/v2L28AZFlmTHcWRfFq5lYqlTNV2Gw2PgDgOO6xX/qWy6Xle7ggCJYrWrPZtGyAfgGRqtINdCIQ0AAAAABJRU5ErkJggg==" opacity="1"/><rect x="0" y="0" width="42" height="1" fill="#1a1a1a" /><rect x="0" y="24" width="42" height="12" fill="url(#seam)" /><rect x="0" y="35" width="42" height="1" fill="#1a1a1a" /></g>
+<g id="decoration-maximized-inactive-center"><rect x="0" y="0" width="42" height="36" fill="url(#barI)" /><image x="0" y="0" width="42" height="36" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAACa0lEQVR4nO2YSYviUBSFz6q7yy7LWNaPNaALUTEgKoaguBARE8QJFZ+4CQ9BURdOOEA0+TG96RaNGjOo1U31tzLPN3Jzzz0v0DTtBx5Av99n9G3xeNwNAI1G4yFrGlKpVFxG/4fD4Td9m6qqLwAgSdKL4w1st9vnn/pfhVL6zdbA9Xrt+fN7t9udhfTp1Ot1r5Px1WrV9iGy2ey7k7W/JqqqGiqFIaVS6SAVPM/7AGC5XNp6Bebz+UXZEUXRXnL85wKUUne73Xbr26PRKKNvi8fjB3UZDodnYywxmUxuZmckErlfqKfTqbMd61iv1z/N9JvP5/YTShAEV7lcZm71I4Q40tmnUCqVPo6fV6uV51pfM6RSqdfjZ1mWX6/1/XQymczft7lisWjf2kmS5LvjXgAAsVjM+3vui3YxnU5/v/eaN1EU5R0ABEGwdeDRaOTcQJuhVqsZSs1isTD9DnIcZ0reDrAsa7i4LMvWJjTA7/ebt4WFQsEwbIFAwPCdopSejN/v9zcrFyHEBQD5fN78RoPB4MMMqyiKz7t/jcdjy6FmWdaby+WuJspsNjuJQrFYtFc8KKVvrVbLUk2+dX0+JplMWvcZhJC7JYcVqtUqAwCapjGfsf5jicVihgk1HA7vXsEAgOd5j94gRyKRg/nhOO56QUgkEqZEutvtXkwAlmUfcqivR6PRsF23B4PBSfgVRTGvOJ1OxwUAoVDIkUEmhFgS/cViwQCAqqqXJazX6zl2MvV6nXE6x9Po9/v2L28AZFlmTHcWRfFq5lYqlTNV2Gw2PgDgOO6xX/qWy6Xle7ggCJYrWrPZtGyAfgGRqtINdCIQ0AAAAABJRU5ErkJggg==" opacity="0.5"/><rect x="0" y="0" width="42" height="1" fill="#111111" /><rect x="0" y="24" width="42" height="12" fill="url(#seamI)" /><rect x="0" y="35" width="42" height="1" fill="#111111" opacity="0.8"/></g>
+</svg>

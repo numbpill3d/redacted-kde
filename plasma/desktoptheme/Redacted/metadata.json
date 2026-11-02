@@ -1,0 +1,17 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "splicer scorn (voidrane)"
+            }
+        ],
+        "Category": "",
+        "Description": "Redacted: monochrome black with static, censor pixels and a seam only just lighter than black",
+        "EnabledByDefault": true,
+        "Id": "Redacted",
+        "License": "GPL-3.0-or-later",
+        "Name": "Redacted",
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "5.0"
+}

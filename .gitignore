@@ -1,0 +1,5 @@
+backup/
+dist/
+__pycache__/
+*.pyc
+*.qsb.tmp

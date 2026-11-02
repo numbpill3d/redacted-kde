@@ -1,0 +1,15 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [ { "Name": "splicer scorn (voidrane)" } ],
+        "Category": "",
+        "Description": "Redacted: VHS dubbed in blood. Red-black surfaces, scanlines and tape grain, crimson glow highlights.",
+        "Id": "scorn.redacted",
+        "License": "GPL-3.0-or-later",
+        "Name": "Redacted",
+        "Version": "1.0"
+    },
+    "Keywords": "Desktop;Workspace;Appearance;Look and Feel;Splash;",
+    "X-Plasma-APIVersion": "2",
+    "X-Plasma-MainScript": "defaults"
+}

@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=redacted
+Description=Blood-dubbed VHS boot: crimson face under scanlines and grain, rolling tracking band, VCR on-screen display, tape-block progress
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/redacted
+ScriptFile=/usr/share/plymouth/themes/redacted/redacted.script
