@@ -1,74 +1,91 @@
 /*
- * Redacted — KSplash. The tape rewinds, then plays; tape blocks fill as
- * Plasma's six startup stages arrive.
+ * Redacted — KSplash. The face starts as one coarse mosaic and resolves as
+ * Plasma's six startup stages arrive; the name unscrambles letter by letter;
+ * the progress bar is a row of censor blocks closing one by one.
  */
 import QtQuick
 
 Rectangle {
     id: root
-    color: "#0a0304"
+    color: "#020202"
     property int stage
     readonly property real u: height / 1080
     readonly property real progress: Math.min(1, stage / 6)
-    property int noiseFrame: 0
 
-    FontLoader { id: osd; source: "images/TerminessNerdFontMono-Bold.ttf" }
-    readonly property string mono: osd.status === FontLoader.Ready ? osd.font.family : "monospace"
-
-    Timer { interval: 70; running: true; repeat: true; onTriggered: root.noiseFrame = (root.noiseFrame + 1 + Math.floor(Math.random() * 3)) % 4 }
-
-    Image { anchors.fill: parent; source: "images/background-dim.jpg"; fillMode: Image.PreserveAspectCrop; horizontalAlignment: Image.AlignLeft }
-    Image { anchors.fill: parent; source: "images/scanlines-1080.png"; smooth: false }
-    Image { anchors.fill: parent; source: "images/noise_" + root.noiseFrame + ".png"; opacity: 0.5; smooth: false }
-    Image {
-        width: parent.width; height: 90 * root.u; source: "images/tracking.png"; opacity: 0.8
-        // fast roll while "rewinding", then a slow drift
-        NumberAnimation on y { from: -100 * root.u; to: root.height; duration: root.stage < 3 ? 1400 : 8000; loops: Animation.Infinite }
-    }
-    Image { anchors.fill: parent; source: "images/vignette.png" }
-
-    component Osd: Item {
-        property alias text: core.text
-        property real size: 30
-        property color ink: "#fff1ef"
-        implicitWidth: core.implicitWidth; implicitHeight: core.implicitHeight
-        Text { x: -1.5 * root.u; text: core.text; font: core.font; color: "#dc1f3c"; opacity: 0.45 }
-        Text { x: 1.5 * root.u; y: 1 * root.u; text: core.text; font: core.font; color: "#dc1f3c"; opacity: 0.3 }
-        Text { id: core; font.family: root.mono; font.bold: true; font.pixelSize: size * root.u; font.letterSpacing: 2 * root.u; color: parent.ink }
-    }
-
-    Osd {
-        x: 56 * root.u; y: 56 * root.u; size: 46
-        text: root.stage < 3 ? "REW ◀◀" : "PLAY ▶"
+    RedactedScene {
+        id: scene
+        anchors.fill: parent
+        art: Qt.resolvedUrl("art/")
+        fps: 15
+        resolve: 0.04 + root.progress * 0.96
+        Behavior on resolve { NumberAnimation { duration: 900; easing.type: Easing.OutCubic } }
+        bright: 0.75 + 0.25 * root.progress
+        doc: false
     }
 
     Item {
-        x: root.width * 0.705 - width / 2
+        id: block
+        x: root.width * 0.70 - width / 2
         anchors.verticalCenter: parent.verticalCenter
-        width: 560 * root.u; height: 200 * root.u
-        Image { source: "images/glow.png"; anchors.centerIn: parent; width: parent.width * 1.5; height: parent.height * 1.8; opacity: 0.16 }
-        Osd { id: logo; anchors.horizontalCenter: parent.horizontalCenter; y: 20 * root.u; size: 64; text: "REDACTED" }
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter; anchors.top: logo.bottom; anchors.topMargin: 10 * root.u
-            text: root.stage < 3 ? "REWINDING" : "SIGNAL BLEEDING"
-            font.family: root.mono; font.pixelSize: 18 * root.u; font.letterSpacing: 5 * root.u; color: "#a87e80"
-        }
+        width: 600 * root.u; height: 240 * root.u
+
+        // R E D A C T E D: each letter flickers through block glyphs until its turn comes
         Row {
+            id: title
             anchors.horizontalCenter: parent.horizontalCenter
-            y: logo.y + logo.height + 54 * root.u
-            spacing: 5 * root.u
+            spacing: 6 * root.u
+            readonly property string word: "REDACTED"
+            readonly property string noise: "█▓▒░#%&$@"
+            property int tick: 0
+            Timer { interval: 70; running: true; repeat: true; onTriggered: title.tick++ }
             Repeater {
-                model: 32
-                Rectangle {
-                    width: 11 * root.u; height: 20 * root.u
-                    readonly property bool lit: index < Math.round(root.progress * 32)
-                    color: lit ? "#dc1f3c" : "#45141b"
-                    Rectangle { visible: parent.lit; width: parent.width; height: 1; color: "#ffa3ad" }
-                    Behavior on color { ColorAnimation { duration: 200 } }
+                model: 8
+                Text {
+                    readonly property bool settled: index < Math.round(root.progress * 8)
+                    text: settled ? title.word.charAt(index)
+                                  : title.noise.charAt((title.tick * 7 + index * 13) % title.noise.length)
+                    font.family: scene.monoFont
+                    font.pixelSize: 58 * root.u
+                    color: settled ? "#bdbdbd" : "#3a3a3a"
                 }
             }
         }
+
+        Text {
+            id: tag
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: title.bottom; anchors.topMargin: 14 * root.u
+            readonly property var words: ["signal acquired", "identity withheld", "memory partial", "observer detached",
+                                          "redacting", "record sealed", "present"]
+            text: words[Math.min(root.stage, 6)]
+            font.family: scene.monoFont; font.pixelSize: 15 * root.u; font.letterSpacing: 4 * root.u
+            color: "#5c5c5c"
+        }
+
+        // censor-block progress
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: tag.bottom; anchors.topMargin: 40 * root.u
+            spacing: 6 * root.u
+            Repeater {
+                model: 6
+                Rectangle {
+                    readonly property bool shut: index < root.stage
+                    width: 64 * root.u; height: 14 * root.u
+                    color: shut ? "#000000" : "#111111"
+                    border.width: 1; border.color: shut ? "#262626" : "#161616"
+                    Behavior on color { ColorAnimation { duration: 260 } }
+                }
+            }
+        }
+        Text {
+            anchors.right: parent.right; anchors.rightMargin: 18 * root.u
+            anchors.bottom: parent.bottom
+            text: "0" + Math.min(root.stage, 6) + " / 06"
+            font.family: scene.monoFont; font.pixelSize: 11 * root.u
+            color: "#3c3c3c"
+        }
     }
 
-    OpacityAnimator on opacity { id: intro; from: 0; to: 1; duration: 300; running: true }
+    OpacityAnimator on opacity { from: 0; to: 1; duration: 300; running: true }
 }

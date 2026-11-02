@@ -1,0 +1,19 @@
+{
+  "KPackageStructure": "KWin/Effect",
+  "KPlugin": {
+    "Name": "Redacted Censor",
+    "Description": "Windows arrive as a grey mosaic full of static under sliding censor bars and resolve into focus; on close they pixelate, are censored and vanish",
+    "Category": "Window Open/Close Animation",
+    "Authors": [ { "Name": "splicer scorn" } ],
+    "Id": "redacted_censor",
+    "License": "GPL-3.0-or-later",
+    "Version": "1.0",
+    "EnabledByDefault": false
+  },
+  "X-KDE-ConfigModule": "kcm_kwin4_genericscripted",
+  "X-KDE-Ordering": "60",
+  "X-KDE-PluginKeyword": "redacted_censor",
+  "X-Plasma-API": "javascript",
+  "X-Plasma-MainScript": "code/main.js",
+  "X-KWin-Exclusive-Category": "toplevel-open-close-animation"
+}

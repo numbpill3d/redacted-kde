@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [ { "Name": "splicer scorn (voidrane)" } ],
+        "Category": "Date and Time",
+        "Description": "A redacted clock: the time sits under censor bars beside a square of live static. Hover to read it.",
+        "Icon": "preferences-system-time",
+        "Id": "scorn.redacted.clock",
+        "License": "GPL-3.0-or-later",
+        "Name": "Redacted Clock",
+        "Version": "1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

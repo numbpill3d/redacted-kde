@@ -1,0 +1,13 @@
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Authors": [ { "Name": "splicer scorn (voidrane)" } ],
+        "Category": "",
+        "Description": "A face under static: drifting mosaic, a censor bar that slips, a dissociated double and a document that redacts itself again",
+        "Icon": "preferences-desktop-wallpaper",
+        "Id": "scorn.redacted",
+        "License": "GPL-3.0-or-later",
+        "Name": "Redacted (animated)",
+        "Version": "1.0"
+    }
+}

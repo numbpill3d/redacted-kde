@@ -1,9 +1,12 @@
-// QT_QPA_PLATFORM=offscreen qml6 tools/preview-splash.qml -- <Splash.qml> <out.png> <stage>
+// nested-grab.sh tools/preview-splash.qml out.png <ms> <stage>
 import QtQuick
 import QtQuick.Window
 Window {
-    id: win; width: 1920; height: 1080; visible: true
+    id: win; visible: true; width: 1920; height: 1080
     readonly property var args: Qt.application.arguments.slice(Qt.application.arguments.indexOf("--") + 1)
-    Loader { id: l; anchors.fill: parent; source: "file://" + win.args[0]; onLoaded: item.stage = parseInt(win.args[2]) }
-    Timer { interval: 1500; running: true; onTriggered: l.item.grabToImage(function (r) { r.saveToFile(win.args[1]); Qt.quit() }) }
+    Loader {
+        anchors.fill: parent
+        source: Qt.resolvedUrl("../plasma/look-and-feel/scorn.redacted/contents/splash/Splash.qml")
+        onLoaded: item.stage = parseInt(win.args[0])
+    }
 }
