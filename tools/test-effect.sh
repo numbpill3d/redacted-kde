@@ -14,7 +14,7 @@ sleep 3
 python3 $HERE/tools/kwin-burst.py $OUTD/open 30 "kwrite $HERE/README.md"
 sleep 2
 python3 $HERE/tools/kwin-burst.py $OUTD/close 1
-( sleep 0.2; pkill -x kwrite ) &
+( sleep 0.2; pkill -f "^kwrite $HERE/README.md\$" ) &   # only the test window, never every kwrite
 python3 $HERE/tools/kwin-burst.py $OUTD/close 30
 IN
 env -u WAYLAND_DISPLAY -u DISPLAY XDG_CONFIG_HOME="$T/config" XDG_RUNTIME_DIR="$T/run" KWIN_SCREENSHOT_NO_PERMISSION_CHECKS=1 \
